@@ -1,0 +1,35 @@
+%% Счетчик вопросов в тесте
+\newcounter{lst} 
+\renewenvironment{enumerate}%
+{\begin{list}%
+			{\arabic{lst}.}{\usecounter{lst}\setlength{\itemsep}{0ex}%
+				\setlength{\parsep}{1.5ex}\setlength{\topsep}{0ex}}  \item[] }%
+{\end{list}}
+
+%% Счетчик вариантов ответа
+\newcounter{qwest}
+\def\theqwest{\arabic{qwest}}
+\newenvironment{q}[1]{ \item  #1 \samepage%
+	\begin{list}{\arabic{qwest})}{\usecounter{qwest}\setlength{\itemsep}{0.5ex}}}{\end{list}\par}
+%		\begin{list}{\asbuk{qwest})}{\usecounter{qwest}}}{\end{list}\par}
+
+%% Счетчик вариантов ответа сопоставлений
+\newcounter{qmwest}
+\def\theqmwest{\arabic{qmwest}}
+\newenvironment{qm}{% \samepage	%
+		\begin{list}{\asbuk{qmwest})}{\usecounter{qmwest}\setlength{\itemsep}{0ex}%
+				\setlength{\parsep}{01.0ex}\setlength{\topsep}{0ex}}}{\end{list}\par}
+
+%% Вопрос без ответов
+\newcommand{\qc}[1]{ \item  #1 \par}
+
+%% Счетчик с номерами билетов
+\newcounter{variant}
+\newcommand{\varnt}{\addtocounter{variant}{1}% 
+%	{\bf Вариант №\arabic{variant}}
+}
+
+\newcommand{\var}{\centering \varnt}
+
+\def\hrf#1{\hbox to#1{\hrulefill}}
+\newcommand{\PoleData}{<<\hrf{1.5em}>>\hrf{4em}\,20\hrf{1.5em}\,г.}

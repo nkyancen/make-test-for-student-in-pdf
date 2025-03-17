@@ -1,0 +1,47 @@
+\documentclass[a3paper,14pt
+%	, twoside % двухсторонняя печать
+	, landscape, twocolumn %печать в две колонки на альбомном листе
+]{extarticle}
+
+\usepackage[left=10.00mm, right=10.00mm, top=20.00mm, bottom=10.00mm]{geometry}   % геометрия страницы
+
+\renewcommand{\columnseprule}{0.6pt} % Задает ширину разделительной линии между колонками
+\setlength{\columnsep}{2em} % Задает ширину разделителя между колонками
+
+\usepackage[utf8]{inputenc}	% Классическая кодировка
+\usepackage[russian]{babel}	% Правила разбиения слов
+%\usepackage{./TESTS} % наши тесты
+
+\usepackage{graphicx}   %хотим вставлять рисунки?
+\graphicspath{{}}   %путь к рисункам
+\usepackage{wrapfig}
+
+%\usepackage{amssymb, amsfonts, amsmath}
+
+\usepackage[singlespacing]{setspace}               % Опция запуска пакета правит не только интервалы в обычном тексте, но и формульные
+\usepackage{float}	% "Плавающие" картинки
+
+%%% Выравнивание и переносы %%%
+\sloppy                             % Избавляемся от переполнений
+\clubpenalty=10000                  % Запрещаем разрыв страницы после первой строки абзаца
+\widowpenalty=10000                 % Запрещаем разрыв страницы после последней строки абзаца
+
+\input{data}
+\input{datavop}
+
+%% Колонтикулы страницы
+\usepackage{fancyhdr} %пакет тонкой настройки колонтикулов
+\renewcommand{\headrulewidth}{0pt} %убрать полосу вверху страницы, отчёркивающую колонтитул от содержания страницы
+\fancyfoot[L,R,C]{}
+%\fancyfoot[C]{\thepage}
+\fancyhead[C]{\discipline\ --- \bf Вариант №\arabic{variant}}
+\fancyhead[L]{ФИО \hrf{6em} \hspace{2em} Группа \hrf{2em}}
+\fancyhead[R]{Дата \PoleData}
+\pagestyle{fancy}
+\setlength{\footskip}{2ex}
+
+\begin{document}
+
+\input{testdata}
+
+\end{document}
