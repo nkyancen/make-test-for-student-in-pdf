@@ -338,10 +338,10 @@ def raz_choise(prt):
                                       
             tdata += r'\end{enumerate}' + '\n\n' + r'\cleardoublepage' + '\n\n\n'
 
-            with open('../tex_files/datavop.tex', 'w', encoding ='utf8') as dvfile:
+            with open('tex_files/datavop.tex', 'w', encoding ='utf8') as dvfile:
                 print(datav, file = dvfile)
 
-            with open('../tex_files/testdata.tex', 'w', encoding ='utf8') as tdfile:
+            with open('tex_files/testdata.tex', 'w', encoding ='utf8') as tdfile:
                 print(tdata, file = tdfile)
 
 ##        print(datav)
