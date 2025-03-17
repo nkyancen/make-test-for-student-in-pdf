@@ -30,17 +30,17 @@ for item in ww.types:
     
 main_label = Label(main, text = 'База подключена\n' + ww.path, font = ww.font_other)
 
-main_dis = Button(main, text = 'Дисциплины', width=10, height=2, font = ww.font_main, \
+main_dis = Button(main, text = 'Дисциплины', width=15, height=2, font = ww.font_main,
                   command = lambda: gw.win_dis(main))
-main_razd = Button(main, text = 'Разделы\nи задания', width=10, height=2, font = ww.font_main, \
-                  command = lambda: gw.win_razd(main))
+main_razd = Button(main, text = 'Разделы\nи задания', width=15, height=2, font = ww.font_main,
+                   command = lambda: gw.win_razd(main))
 ## main_prob = Button(main, text = 'Задания', width=10,height=2, font = ww.font_main)
-main_test = Button(main, text = 'Тесты', height=2, font = ww.font_main,\
+main_test = Button(main, text = 'Тесты', width=20, height=2, font = ww.font_main,
                    command = lambda: mt.dis_choise(main))
 
 main_label.grid(row = 1, column = 1, columnspan = 2, pady = 20, padx = (10,10), sticky = 'ew')
-main_dis.grid(row = 2, column = 1, pady = 20, padx = 10, sticky = 'w')
-main_razd.grid(row = 2, column = 2, padx = 10, sticky = 'e')
+main_dis.grid(row = 2, column = 1, pady = 20, padx = 5, sticky = 'w')
+main_razd.grid(row = 2, column = 2, padx = 5, sticky = 'e')
 ##main_prob.grid(row = 2, column = 3, padx = 10)
 main_test.grid(row = 4, column = 1, columnspan = 2, padx = (10,10), pady = 10, sticky = 'ew')
 

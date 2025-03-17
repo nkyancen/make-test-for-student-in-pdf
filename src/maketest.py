@@ -27,7 +27,7 @@ def dis_choise(pwin):
 
     rt = (pwin, dc_win, dc_list)
     
-    dc_but = Button(dc_win, text = 'Выбратьть\nдиcциплину', font = ww.font_other,\
+    dc_but = Button(dc_win, text = 'Выбратьть\nдиcциплину', font = ww.font_other,
                     command = lambda: raz_test_form(rt))
 
     dc_label.grid(row = 1, column = 1, columnspan = 2, pady = (10,5))
@@ -67,43 +67,43 @@ def raz_test_form(par_rt):
         
         num_vars = IntVar()
         
-        tf_spbox = Spinbox(tform, from_= 1, to = 50, textvariable= num_vars, \
-                            justify='center', width=4, font=ww.font_other )
+        tf_spbox = Spinbox(tform, from_= 1, to = 50, textvariable= num_vars,
+                           justify='center', width=4, font=ww.font_other )
 
         tf_frame = Frame(tform)
 
-        tf_num_label = Label(tf_frame, \
-                             text = 'Количество заданий\nкаждого типа:', \
+        tf_num_label = Label(tf_frame,
+                             text = 'Количество заданий\nкаждого типа:',
                              font = ww.font_other, width = 25)
 
 
-        tf_label_ko = Label(tf_frame, \
-                             text = 'С кратким ответом:', \
+        tf_label_ko = Label(tf_frame,
+                            text = 'С кратким ответом:',
                             font = ww.font_other, width = 25)
 
         num_ko = IntVar()
         
-        tf_scale_ko = Scale( tf_frame, variable = num_ko, from_=0, to=20, resolution=1, \
+        tf_scale_ko = Scale( tf_frame, variable = num_ko, from_=0, to=20, resolution=1,
                              orient='horizontal', tickinterval=2 )
 
 
-        tf_label_vo = Label(tf_frame, \
-                             text = 'С вариантами ответа:', \
+        tf_label_vo = Label(tf_frame,
+                            text = 'С вариантами ответа:',
                             font = ww.font_other, width = 25)
 
         num_vo = IntVar()
         
-        tf_scale_vo = Scale( tf_frame, variable = num_vo, from_=0, to=20, resolution=1, \
+        tf_scale_vo = Scale( tf_frame, variable = num_vo, from_=0, to=20, resolution=1,
                              orient='horizontal', tickinterval=2 )
 
 
-        tf_label_sp = Label(tf_frame, \
-                             text = 'На сопоставление:', \
+        tf_label_sp = Label(tf_frame,
+                            text = 'На сопоставление:',
                             font = ww.font_other, width = 25)
 
         num_sp = IntVar()
         
-        tf_scale_sp = Scale( tf_frame, variable = num_sp, from_=0, to=3, resolution=1, \
+        tf_scale_sp = Scale( tf_frame, variable = num_sp, from_=0, to=3, resolution=1,
                              orient='horizontal', tickinterval=1 )
 
         tf_rt = (tform, tf_raz_list, num_vars, num_ko, num_vo, num_sp, dis_ch)
@@ -118,12 +118,12 @@ def raz_test_form(par_rt):
         tf_all = (tform, tf_raz_list, 0, n, n, n, dis_ch)
         
 
-        tf_raz_but = Button(tform, text = 'Сформировать\nтест', font = ww.font_other,\
+        tf_raz_but = Button(tform, text = 'Сформировать\nтест', font = ww.font_other,
                             command = lambda:raz_choise(tf_rt))
-        tf_quit_but = Button(tform, text = 'Закрыть', font = ww.font_other, height=2, \
+        tf_quit_but = Button(tform, text = 'Закрыть', font = ww.font_other, height=2,
                              command = tform.destroy)
-        tf_araz_but = Button(tform, text = 'Все\nзадания', font = ww.font_other,\
-                            command = lambda:raz_choise(tf_all))
+        tf_araz_but = Button(tform, text = 'Все\nзадания', font = ww.font_other,
+                             command = lambda:raz_choise(tf_all))
         
 
         tf_raz_label.grid(row = 1, column = 1, columnspan = 2, pady = (10,5))
@@ -212,8 +212,7 @@ def raz_choise(prt):
             tmp_dic = {}
             for tp in ww.pr_type:
                 temp = []
-                for elem in ww.dbout('problem', ('prob_raz = ' + str(tmp_rid) + \
-                                                 ' AND prob_type = ' + str(tp))):
+                for elem in ww.dbout('problem', ('prob_raz = ' + str(tmp_rid) + ' AND prob_type = ' + str(tp))):
                     temp.append((elem))
                 tmp_dic[ww.pr_type[tp]] = temp
             prob_ch[raz_ch[-1]] = tmp_dic
@@ -236,7 +235,7 @@ def raz_choise(prt):
             tempv = []
             for rz in prob_ch:
                 for tp in prob_ch[rz]:
-                    n = 0
+                    # n = 0
                     if num_type[tp] > 0:
                         if len(prob_ch[rz][tp]) > num_type[tp]:
                             n = num_type[tp]
@@ -261,7 +260,7 @@ def raz_choise(prt):
 
                 if ww.pr_type[pr_temp[2]] == 'КО':
                     datav += '\n'
-                    tdata += '\t' + r'\qc{' + prob + r' \vspace{0.45\textheight}' + '}\n\n'
+                    tdata += '\t' + r'\qc{' + prob + r' \vspace{0.4\textheight}' + '}\n\n'
 
                 elif ww.pr_type[pr_temp[2]] == 'ВО':
                     temp_ans = []
@@ -338,10 +337,10 @@ def raz_choise(prt):
                                       
             tdata += r'\end{enumerate}' + '\n\n' + r'\cleardoublepage' + '\n\n\n'
 
-            with open('datavop.tex', 'w', encoding = 'utf8') as dvfile:
+            with open('tex_files/datavop.tex', 'w', encoding ='utf8') as dvfile:
                 print(datav, file = dvfile)
 
-            with open('testdata.tex', 'w', encoding = 'utf8') as tdfile:
+            with open('tex_files/testdata.tex', 'w', encoding ='utf8') as tdfile:
                 print(tdata, file = tdfile)
 
 ##        print(datav)
