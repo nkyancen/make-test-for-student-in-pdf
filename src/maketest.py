@@ -347,6 +347,6 @@ def raz_choise(prt):
 ##        print(tdata)
             
 
-        os.system('pdflatex -synctex=1 -interaction=nonstopmode "mktest".tex')
+        os.system('pdflatex -synctex=1 -interaction=nonstopmode mktest.tex')
     
         os.system('xdg-open mktest.pdf')
