@@ -2,17 +2,18 @@
 
 import sqlite3
 
+
 class UseDB:
 
-    def __init__(self,db:str='TestVop.db') -> None:
-        self.path = db
+    def __init__(self, dataBase: str = 'TestVop.db') -> None:
+        self.pathOfBase = dataBase
 
     def __enter__(self) -> 'cursor':
-        self.conn = sqlite3.connect(self.path)
-        self.curs = self.conn.cursor()
-        return self.curs
+        self.connectedBase = sqlite3.connect(self.pathOfBase)
+        self.cursorInConnectedBase = self.connectedBase.cursor()
+        return self.cursorInConnectedBase
 
     def __exit__(self, exc_type, exc_value, exc_trace) -> None:
-        self.conn.commit()
-        self.curs.close()
-        self.conn.close()
+        self.connectedBase.commit()
+        self.cursorInConnectedBase.close()
+        self.connectedBase.close()

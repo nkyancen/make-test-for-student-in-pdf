@@ -1,54 +1,56 @@
 #!/usr/bin/env python3
+from pexpect.screen import screen
 
 from DBc import UseDB
 
-path = ''
+path_of_base = ''
 
-sw = 1920
-sh = 1080
+screenWeight = 1920
+screenHeight = 1080
 
-font_main = 'serif 14'
-font_other = 'serif 11'
+main_font = 'serif 14'
+other_font = 'serif 11'
 
-types = {}
-pr_type = {}
+types_of_problems = {}
+type_of_problem = {}
+
 
 ## Добавляем запись в таблицу БД
-def dbins(tab:str, ti:tuple, mask:str='?') -> None:
-    with UseDB(path) as curs:
+def dbins(tab: str, ti: tuple, mask: str = '?') -> None:
+    with UseDB(path_of_base) as curs:
         curs.execute('INSERT INTO ' + tab + ' VALUES (NULL,' + mask + ')', ti)
 
 
 ## Удаляем запись из таблицы БД
-def dbdel(tab:str, td:tuple) -> None:
-    sqld = 'DELETE FROM ' + tab + ' WHERE %s_id = %s' % td
+def dbdel(tab: str, td: tuple) -> None:
+    request_to_delete = 'DELETE FROM ' + tab + ' WHERE %s_id = %s' % td
 
-    with UseDB(path) as curs:
-        curs.execute(sqld)
-        
+    with UseDB(path_of_base) as currentBase:
+        currentBase.execute(request_to_delete)
+
 
 # Изменяем запись в таблице БД
-def dbupd(tab:str, tu:tuple) -> None:
-    sqlu = 'UPDATE ' + tab + ' SET %s = "%s" WHERE %s_id = %s' %tu
+def dbupd(tab: str, tu: tuple) -> None:
+    sqlu = 'UPDATE ' + tab + ' SET %s = "%s" WHERE %s_id = %s' % tu
 
-    with UseDB(path) as curs:
-        curs.execute(sqlu)
-        
+    with UseDB(path_of_base) as curentBase:
+        curentBase.execute(sqlu)
+
 
 ## Выбираем записи из таблицы БД
-def dbout(tab:str, to:tuple=()) -> dict:
+def dbout(tab: str, to: tuple = ()) -> dict:
     dic = {}
 
-    with UseDB(path) as curs:
+    with UseDB(path_of_base) as curs:
         if not to:
             sqlo = 'SELECT * FROM ' + tab
         else:
-            sqlo = 'SELECT * FROM ' + tab +' WHERE %s' % to
+            sqlo = 'SELECT * FROM ' + tab + ' WHERE %s' % to
 
         for row in curs.execute(sqlo):
             temp = []
 
-            for i in range(1,len(row)):
+            for i in range(1, len(row)):
                 temp.append(str(row[i]))
 
             dic[str(row[0])] = temp
@@ -57,41 +59,43 @@ def dbout(tab:str, to:tuple=()) -> dict:
 
 
 ## Возвращаем ключ по значению
-def kval(dic:dict, val:list) -> str:
+def kval(dic: dict, val: list) -> str:
     val = list(val)
     temp = ''
     for item in dic:
         if val == dic[item]:
             temp = item
-    return temp    
+    return temp
+
 
 ## Проверка зависимости между родительской и дочерней таблицами
-def find_couple(dic_child:dict, val_par:str) -> bool:
+def find_couple(dic_child: dict, val_par: str) -> bool:
     temp = []
     for item in dic_child.values():
         temp.append(val_par in item)
 
-    fс = True in temp
-    return fс
+    return True in temp
+
 
 ## Проверка наличия пункта в таблице
-def find(dic:dict, val:list) -> bool:
+def find(dic: dict, val: list) -> bool:
     val = list(val)
     temp = []
     for item in dic.values():
         temp.append(val == item)
 
-    f = True in temp
-    return f
+    return True in temp
+
 
 ## Заменяем номер на текст
 def trans(numb, n) -> str:
     numb = int(numb)
     name = str(numb)
 
-    for item in range(n):
-        if numb // 10**(item+1) == 0:
-            name = '0' + name
+    # for item in range(n):
+    #     if numb // 10**(item+1) == 0:
+    #         name = '0' + name
+    name.rjust(n, "0")
 
     name = name.replace('0', 'zero')
     name = name.replace('1', 'one')
